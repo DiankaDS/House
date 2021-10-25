@@ -2,29 +2,33 @@
 
 public class TempBrick : MonoBehaviour
 {
-    public bool isAviable = true;
-    public bool isDragging = true;
+    public bool isAviable;
+    public bool isDragging;
 
     private Camera mainCamera;
+    private MeshRenderer mesh;
 
     [SerializeField] private Material normalMaterial;
     [SerializeField] private Material errorMaterial;
 
     private void Awake()
     {
+        isAviable = true;
+        isDragging = true;
         mainCamera = Camera.main;
+        mesh = this.GetComponent<MeshRenderer>();
     }
 
     public void SetNormal()
     {
         isAviable = true;
-        this.GetComponent<MeshRenderer>().material = normalMaterial;
+        mesh.material = normalMaterial;
     }
 
     public void SetError()
     {
         isAviable = false;
-        this.GetComponent<MeshRenderer>().material = errorMaterial;
+        mesh.material = errorMaterial;
     }
 
     public void OnCollisionEnter(Collision other)

@@ -8,12 +8,14 @@ public class Builder : MonoBehaviour
 {
     public Vector2Int GridSize = new Vector2Int(10, 10);
 
-    private int camSpeed = 2;
+    private int camSpeed;
+    private int rotateSpeed;
     private Vector2 startPoint;
     private Brick[,] grid;
     private TempBrick tempBrick;
     private Brick brickPrefab;
     private Camera mainCamera;
+    private int angle;
 
     [SerializeField] private Canvas uiMenu;
     // [SerializeField] private Canvas editMenu;
@@ -23,6 +25,9 @@ public class Builder : MonoBehaviour
         grid = new Brick[GridSize.x, GridSize.y];
         
         mainCamera = Camera.main;
+        camSpeed = 2;
+        angle = 45;
+        rotateSpeed = 5;
     }
 
     private void RotateTemp()
@@ -30,7 +35,7 @@ public class Builder : MonoBehaviour
         float xDistance = startPoint.x - Input.mousePosition.x;
         if (xDistance != 0) {
             int direction = (xDistance < 0) ? -1 : 1;
-            tempBrick.transform.rotation = Quaternion.Euler(0, tempBrick.transform.rotation.eulerAngles.y + direction * 5, 0);
+            tempBrick.transform.rotation = Quaternion.Euler(0, tempBrick.transform.rotation.eulerAngles.y + direction * rotateSpeed, 0);
             startPoint = Input.mousePosition;
         }
     }
@@ -98,7 +103,7 @@ public class Builder : MonoBehaviour
         if (tempBrick != null && !tempBrick.isDragging)
         {
             tempBrick.transform.rotation = Quaternion.Euler(
-                0, Mathf.RoundToInt(tempBrick.transform.rotation.eulerAngles.y / 45) * 45, 0);
+                0, Mathf.RoundToInt(tempBrick.transform.rotation.eulerAngles.y / angle) * angle, 0);
         }
         else if (tempBrick != null && tempBrick.isDragging) 
         {
