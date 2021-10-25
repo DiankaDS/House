@@ -8,7 +8,8 @@ public class Builder : MonoBehaviour
 {
     public Vector2Int GridSize = new Vector2Int(10, 10);
 
-    private float startPoint;
+    private int camSpeed = 2;
+    private Vector2 startPoint;
     private Brick[,] grid;
     private TempBrick tempBrick;
     private Brick brickPrefab;
@@ -26,13 +27,28 @@ public class Builder : MonoBehaviour
 
     private void RotateTemp()
     {
-        float endPoint = Input.mousePosition.x;
-        float delta = startPoint - Input.mousePosition.x;
-        if (delta != 0) {
-            int direction = (delta < 0) ? -1 : 1;
+        float xDistance = startPoint.x - Input.mousePosition.x;
+        if (xDistance != 0) {
+            int direction = (xDistance < 0) ? -1 : 1;
             tempBrick.transform.rotation = Quaternion.Euler(0, tempBrick.transform.rotation.eulerAngles.y + direction * 5, 0);
-            startPoint = endPoint;
+            startPoint = Input.mousePosition;
         }
+    }
+
+    private void MoveCamera()
+    {
+        float xDistance = startPoint.x - Input.mousePosition.x;
+        float yDistance = startPoint.y - Input.mousePosition.y;
+
+        float interpolation = camSpeed * Time.deltaTime;
+        
+        Vector3 position = mainCamera.transform.position;
+        position.y = mainCamera.transform.position.y;
+        position.x = Mathf.Lerp(mainCamera.transform.position.x, mainCamera.transform.position.x + xDistance, interpolation);
+        position.z = Mathf.Lerp(mainCamera.transform.position.z, mainCamera.transform.position.z + yDistance, interpolation);
+            
+        mainCamera.transform.position = position;
+        startPoint = Input.mousePosition;
     }
 
     public void StartPlacing(TempBrick temp, Brick brick)
@@ -62,17 +78,14 @@ public class Builder : MonoBehaviour
 
     public void OnMouseDown()
     {
-        if (tempBrick != null && !tempBrick.isDragging)
-        {
-            startPoint = Input.mousePosition.x;
-        }
+        startPoint = Input.mousePosition;
 	}
 
     public void OnMouseDrag()
     {
         if (tempBrick == null)
-        {
-            //TODO: mainCamera movement
+        {   
+            MoveCamera();
         }
         else if (tempBrick != null && !tempBrick.isDragging)
         {
