@@ -27,9 +27,14 @@ public class TempBrick : MonoBehaviour
         this.GetComponent<MeshRenderer>().material = errorMaterial;
     }
 
-    public void OnCollisionEnter(Collision collision)
+    public void OnCollisionEnter(Collision other)
     {
-        Debug.Log("Collision!");
+        SetError();
+    }
+
+    public void OnCollisionExit(Collision other)
+    {
+        SetNormal();
     }
 
     public void Update() //OnMouseDrag()

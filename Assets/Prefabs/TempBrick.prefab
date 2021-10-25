@@ -108,6 +108,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isAviable: 1
+  isDragging: 1
   normalMaterial: {fileID: 2100000, guid: b9153838b46a6f6dab0ac7fb4bba625e, type: 2}
   errorMaterial: {fileID: 2100000, guid: 76cfeb59d7a215c138ae1216dde3468b, type: 2}
 --- !u!54 &4290529096208787327
@@ -122,7 +123,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 0
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
