@@ -108,7 +108,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   normalMaterial: {fileID: 2100000, guid: 6e284967b043e7532bde1b308bc2e3d8, type: 2}
-  tempMaterial: {fileID: 2100000, guid: b9153838b46a6f6dab0ac7fb4bba625e, type: 2}
+  hideMaterial: {fileID: 2100000, guid: 0914caf3bd8745f0d9d1248294219432, type: 2}
 --- !u!54 &-1548157459494170912
 Rigidbody:
   m_ObjectHideFlags: 0

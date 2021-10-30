@@ -13,7 +13,6 @@ public class Builder : MonoBehaviour
     private Vector2 startPoint;
     private Brick[,] grid;
     private TempBrick tempBrick;
-    private Transform tempWall;
     private Brick brickPrefab;
     private Camera mainCamera;
     private int angle;
@@ -141,17 +140,6 @@ public class Builder : MonoBehaviour
             Destroy(tempBrick.gameObject);
             tempBrick = null;
             uiMenu.gameObject.SetActive(false);
-        }
-    }
-
-    public void EditWall(Transform wall)
-    {
-        tempWall = wall;
-        uiMenu.gameObject.SetActive(true);
-
-        for (int i = 0; i< wall.transform.childCount; i++)
-        {
-            wall.transform.GetChild(i).GetComponent<Brick>().SetTempMaterial();
         }
     }
 }
