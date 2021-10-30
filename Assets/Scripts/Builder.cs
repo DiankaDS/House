@@ -103,7 +103,7 @@ public class Builder : MonoBehaviour
         if (tempBrick != null && !tempBrick.isDragging)
         {
             tempBrick.transform.rotation = Quaternion.Euler(
-                0, Mathf.RoundToInt(tempBrick.transform.rotation.eulerAngles.y / angle) * angle, 0);
+                0, Mathf.RoundToInt(tempBrick.transform.rotation.eulerAngles.y / angle) * angle % 180, 0);
         }
         else if (tempBrick != null && tempBrick.isDragging) 
         {
