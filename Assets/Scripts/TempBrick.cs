@@ -4,6 +4,7 @@ public class TempBrick : MonoBehaviour
 {
     public bool isAviable;
     public bool isDragging;
+    public Transform parentWall;
 
     private Camera mainCamera;
     private MeshRenderer mesh;
@@ -18,6 +19,7 @@ public class TempBrick : MonoBehaviour
         isAviable = true;
         isDragging = true;
         mainCamera = Camera.main;
+        parentWall = null;
         mesh = this.GetComponent<MeshRenderer>();
     }
 
@@ -35,6 +37,8 @@ public class TempBrick : MonoBehaviour
 
     public void OnCollisionEnter(Collision other)
     {
+        parentWall = other.transform.parent;
+        
         SetNearPosinion(other, true);
         // SetError();
     }
@@ -49,6 +53,7 @@ public class TempBrick : MonoBehaviour
     {
         transform.position = new Vector3(transform.position.x, minY, transform.position.z);
         // SetNormal();
+        parentWall = null;
     }
 
     public void Update() //OnMouseDrag()
