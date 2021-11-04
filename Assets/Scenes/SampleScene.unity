@@ -1611,6 +1611,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GridSize: {x: 10, y: 10}
   uiMenu: {fileID: 816086878}
+  wall: {fileID: 2136999129178953499, guid: 6fec09f7541543ff3a021421670c9a7f, type: 3}
 --- !u!1 &1879539217
 GameObject:
   m_ObjectHideFlags: 0

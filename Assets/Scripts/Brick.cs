@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
+using System;
 
 public class Brick : MonoBehaviour
 {
     private bool isHide;
     private Builder builder;
     private MeshRenderer mesh;
+    private Vector3[] points;
 
     [SerializeField] private Material normalMaterial;
     [SerializeField] private Material hideMaterial;
@@ -13,6 +15,7 @@ public class Brick : MonoBehaviour
     {
         isHide = false;
         mesh = this.GetComponent<MeshRenderer>();
+        SetPoints();
     }
 
     public void SetBuilder(Builder builderToSet)
@@ -48,5 +51,17 @@ public class Brick : MonoBehaviour
     {
         isHide = false;
         mesh.material = normalMaterial;
+    }
+
+    private void SetPoints()
+    {
+        int angle = (int)(transform.rotation.eulerAngles.y * Mathf.PI/180);
+        float sin = (float)Math.Round(Mathf.Sin(angle), 1);
+        float cos = (float)Math.Round(Mathf.Cos(angle), 1);
+
+        points = new Vector3[2]{
+            new Vector3(transform.position.x - sin, transform.position.y, transform.position.z - cos),
+            new Vector3(transform.position.x + sin, transform.position.y, transform.position.z + cos)
+        };
     }
 }

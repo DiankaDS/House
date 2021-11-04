@@ -18,6 +18,7 @@ public class Builder : MonoBehaviour
     private int angle;
 
     [SerializeField] private Canvas uiMenu;
+    [SerializeField] private GameObject wall;
     // [SerializeField] private Canvas editMenu;
     
     private void Awake()
@@ -124,9 +125,9 @@ public class Builder : MonoBehaviour
             }
             else
             {
-                GameObject parentObject = new GameObject();
-                parentObject.name = "Wall"; 
+                GameObject parentObject = Instantiate(wall, brick.transform.position, brick.transform.rotation);
                 brick.transform.parent = parentObject.transform;
+                parentObject.GetComponent<Wall>().SetBrick(brick);
             }
 
             CancelPlacing();
